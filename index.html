@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-slate-950">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Dunamu CGBO Executive Lab: Conversational Currency & Networking Mastery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    },
+                    colors: {
+                        brand: {
+                            500: '#0284c7',
+                            600: '#0369a1',
+                            700: '#075985',
+                            900: '#0c4a6e',
+                            950: '#082f49'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #090d16;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+        .tab-active {
+            background-color: #0284c7 !important;
+            color: #ffffff !important;
+            border-color: #38bdf8 !important;
+            box-shadow: 0 4px 14px 0 rgba(2, 132, 199, 0.35);
+        }
+        .active-filter {
+            background-color: #0284c7 !important;
+            color: #ffffff !important;
+            border-color: #38bdf8 !important;
+        }
+        input, button, select {
+            -webkit-tap-highlight-color: transparent;
+        }
+        .touch-manipulate {
+            touch-action: manipulation;
+        }
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 1rem;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+    </style>
+</head>
+<body class="h-full text-slate-100 font-sans antialiased flex flex-col overflow-hidden bg-slate-950 select-none">
+
+    <!-- Non-blocking Toast Notification -->
+    <div id="toast-container" class="fixed top-4 right-4 z-50 flex flex-col gap-2 pointer-events-none max-w-sm w-full px-4"></div>
+
+    <!-- Executive Top Header -->
+    <header class="bg-slate-900 border-b border-slate-800 px-4 md:px-6 py-3 flex flex-col sm:flex-row justify-between items-center shrink-0 gap-3 z-20">
+        <div class="flex items-center gap-3 w-full sm:w-auto">
+            <div class="bg-gradient-to-br from-sky-500 to-blue-700 text-white font-black text-xs px-3 py-1.5 rounded-lg tracking-wider uppercase shadow-md shadow-sky-900/40 shrink-0">
+                Dunamu CGBO
+            </div>
+            <div class="truncate">
+                <h1 class="text-sm md:text-base font-bold text-white tracking-tight flex items-center gap-2 truncate">
+                    <span>Networking Lab:</span>
+                    <span class="text-sky-400 font-medium truncate">Conversational Currency & Fast Ear Conditioning</span>
+                </h1>
+                <p class="text-[11px] text-slate-400 truncate">Student: Onestein (CGBO) • Coach: Nam Frank Kwang Woo (GAGYO) • Source: Harvard Business Review</p>
+            </div>
+        </div>
+
+        <!-- 60-Minute Executive Session Timer -->
+        <div class="flex items-center justify-between sm:justify-end gap-3 w-full sm:w-auto">
+            <div class="flex items-center gap-2 bg-slate-950 px-3.5 py-1.5 rounded-xl border border-slate-800">
+                <div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+                <div class="text-right">
+                    <div class="text-[9px] uppercase font-bold text-slate-400 tracking-wider">Session Clock</div>
+                    <div id="timer-display" class="text-xs md:text-sm font-mono font-bold text-sky-400">60:00</div>
+                </div>
+            </div>
+            <button onclick="toggleTimer()" id="timer-btn" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs px-3 py-1.5 rounded-lg font-medium transition flex items-center gap-1.5 touch-manipulate">
+                <span>⏱️</span> <span id="timer-btn-text">Pause</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Top Horizontal Navigation Tab Bar -->
+    <nav class="bg-slate-900/95 backdrop-blur border-b border-slate-800 px-4 md:px-6 py-2 flex items-center gap-2 overflow-x-auto shrink-0 scrollbar-none z-10">
+        <button onclick="switchTab('stage1')" id="tab-btn-stage1" class="nav-tab tab-active px-3.5 py-2 rounded-xl text-xs font-semibold transition border border-transparent text-slate-300 hover:bg-slate-800 shrink-0 flex items-center gap-2 touch-manipulate">
+            <span>🎬 1. Video & Ear Priming</span>
+            <span class="bg-sky-950 text-sky-300 text-[10px] px-1.5 py-0.5 rounded-full font-bold border border-sky-800/80">HBR Case</span>
+        </button>
+        <button onclick="switchTab('stage2')" id="tab-btn-stage2" class="nav-tab px-3.5 py-2 rounded-xl text-xs font-semibold transition border border-transparent text-slate-300 hover:bg-slate-800 shrink-0 flex items-center gap-2 touch-manipulate">
+            <span>💡 2. The Executive Take</span>
+            <span class="bg-slate-800 text-slate-400 text-[10px] px-1.5 py-0.5 rounded-full font-bold">Dunamu Angle</span>
+        </button>
+        <button onclick="switchTab('curriculum')" id="tab-btn-curriculum" class="nav-tab px-3.5 py-2 rounded-xl text-xs font-semibold transition border border-transparent text-slate-300 hover:bg-slate-800 shrink-0 flex items-center gap-2 touch-manipulate">
+            <span>📚 3. Target Curriculum</span>
+            <span class="bg-slate-800 text-slate-400 text-[10px] px-1.5 py-0.5 rounded-full font-bold">14 Fresh Units</span>
+        </button>
+        <button onclick="switchTab('sparring')" id="tab-btn-sparring" class="nav-tab px-3.5 py-2 rounded-xl text-xs font-semibold transition border border-transparent text-slate-300 hover:bg-slate-800 shrink-0 flex items-center gap-2 touch-manipulate">
+            <span>🥂 4. Networking Sparring</span>
+            <span class="bg-slate-800 text-slate-400 text-[10px] px-1.5 py-0.5 rounded-full font-bold">Cocktail vs. Dinner</span>
+        </button>
+        <button onclick="switchTab('dictation')" id="tab-btn-dictation" class="nav-tab px-3.5 py-2 rounded-xl text-xs font-semibold transition border border-transparent text-slate-300 hover:bg-slate-800 shrink-0 flex items-center gap-2 touch-manipulate">
+            <span>📝 5. Graduated Dictation Lab</span>
+            <span class="bg-slate-800 text-slate-400 text-[10px] px-1.5 py-0.5 rounded-full font-bold">12 Questions</span>
+        </button>
+    </nav>
+
+    <!-- Scrollable Workspace -->
+    <main class="flex-1 overflow-y-auto p-4 md:p-6 lg:p-8 bg-slate-950 text-slate-200">
+
+        <!-- TAB 1: VIDEO & EAR PRIMING (STAGE 1 & 2) -->
+        <div id="tab-stage1" class="tab-content max-w-5xl mx-auto space-y-6">
+            
+            <!-- Ear Priming Banner -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-3">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-sky-400 bg-sky-950 border border-sky-800 px-2.5 py-0.5 rounded-md">Stage 1: Pre-Listening Ear Conditioning</span>
+                        <h2 class="text-lg md:text-xl font-bold text-white mt-1">Acoustic Landmines (Listen Before Playing Video)</h2>
+                    </div>
+                    <span class="text-xs bg-emerald-500/20 text-emerald-400 px-3 py-1 rounded-full border border-emerald-500/30 font-semibold self-start sm:self-auto">Zero-Subtitle Training</span>
+                </div>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                    Native speakers in high-stakes settings speak with rapid reductions and dropped stops. Condition Onestein's ear with these 4 acoustic sequences found in the Harvard Business Review video so his brain decodes them automatically.
+                </p>
+
+                <!-- 4 Acoustic Sequences -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2" id="acoustic-priming-grid">
+                    <!-- Populated via JS -->
+                </div>
+            </div>
+
+            <!-- Video Player & Timestamp Navigator -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-4">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800 pb-3">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-emerald-400 bg-emerald-950 border border-emerald-800 px-2.5 py-0.5 rounded-md">Stage 2: In-Class Dual-Pass Listening</span>
+                        <h3 class="text-base font-bold text-white mt-1">HBR: Easy Networking Tips for the Networking Haters (02:49)</h3>
+                    </div>
+                    <div class="text-xs text-slate-400">
+                        Target: Watch first time <strong>without captions</strong>
+                    </div>
+                </div>
+
+                <!-- Video Frame with Enhanced Referrer Policy & Sandbox Compatibility -->
+                <div class="video-container bg-black border border-slate-800 shadow-2xl relative">
+                    <iframe id="hbr-youtube-player" 
+                        src="https://www.youtube-nocookie.com/embed/MnrINCauK-E?rel=0&modestbranding=1" 
+                        title="Harvard Business Review Networking Video" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        referrerpolicy="strict-origin-when-cross-origin" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+
+                <!-- Embed Fallback & Direct External Link Bar -->
+                <div class="flex flex-wrap items-center justify-between gap-2 p-3 bg-slate-950/80 rounded-xl border border-slate-800 text-xs">
+                    <div class="flex items-center gap-2 text-slate-400">
+                        <span>💡 <span class="text-slate-300">If your browser security blocks embeds:</span></span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="toggleEmbedDomain()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 px-2.5 py-1 rounded-lg transition font-mono text-[11px] touch-manipulate">
+                            🔄 Toggle Embed Mode
+                        </button>
+                        <a id="external-yt-link" href="https://www.youtube.com/watch?v=MnrINCauK-E" target="_blank" rel="noopener noreferrer" class="bg-red-600/20 hover:bg-red-600/30 text-red-400 border border-red-500/30 px-3 py-1 rounded-lg transition font-semibold flex items-center gap-1.5 touch-manipulate">
+                            <span>▶️</span> <span>Open in YouTube App/Tab</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Timestamp Bookmarks Scrub Bar -->
+                <div class="space-y-2">
+                    <span class="text-[11px] font-bold uppercase text-slate-400 tracking-wider">Direct Timestamp Bookmarks (Tap to Jump)</span>
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="seekToTimestamp(4)" class="timestamp-btn bg-slate-950 hover:bg-slate-800 text-sky-400 border border-slate-800 px-3 py-1.5 rounded-xl text-xs font-mono transition touch-manipulate flex items-center gap-1.5">
+                            <span>⏱️ 00:04</span> <span class="text-slate-300 font-sans">"Said almost no one ever"</span>
+                        </button>
+                        <button onclick="seekToTimestamp(30)" class="timestamp-btn bg-slate-950 hover:bg-slate-800 text-sky-400 border border-slate-800 px-3 py-1.5 rounded-xl text-xs font-mono transition touch-manipulate flex items-center gap-1.5">
+                            <span>⏱️ 00:30</span> <span class="text-slate-300 font-sans">Tip 1: Look for Islands</span>
+                        </button>
+                        <button onclick="seekToTimestamp(45)" class="timestamp-btn bg-slate-950 hover:bg-slate-800 text-sky-400 border border-slate-800 px-3 py-1.5 rounded-xl text-xs font-mono transition touch-manipulate flex items-center gap-1.5">
+                            <span>⏱️ 00:45</span> <span class="text-slate-300 font-sans">Odd-Numbered Groups</span>
+                        </button>
+                        <button onclick="seekToTimestamp(61)" class="timestamp-btn bg-slate-950 hover:bg-slate-800 text-sky-400 border border-slate-800 px-3 py-1.5 rounded-xl text-xs font-mono transition touch-manipulate flex items-center gap-1.5">
+                            <span>⏱️ 01:01</span> <span class="text-slate-300 font-sans">Tip 2: Reviving Dormant Ties</span>
+                        </button>
+                        <button onclick="seekToTimestamp(95)" class="timestamp-btn bg-slate-950 hover:bg-slate-800 text-sky-400 border border-slate-800 px-3 py-1.5 rounded-xl text-xs font-mono transition touch-manipulate flex items-center gap-1.5">
+                            <span>⏱️ 01:35</span> <span class="text-slate-300 font-sans">Tip 3: Turn It Into a Game</span>
+                        </button>
+                        <button onclick="seekToTimestamp(124)" class="timestamp-btn bg-slate-950 hover:bg-slate-800 text-sky-400 border border-slate-800 px-3 py-1.5 rounded-xl text-xs font-mono transition touch-manipulate flex items-center gap-1.5">
+                            <span>⏱️ 02:04</span> <span class="text-slate-300 font-sans">Tip 4: Mutual Interest vs. Weather</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Comprehension Check Deck -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800/80 space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-sky-400 uppercase tracking-wider">Pass 1: Macro Elevator Summary</span>
+                            <span class="text-[10px] text-slate-500 font-mono">15-Sec Challenge</span>
+                        </div>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            Have Onestein summarize the core thesis out loud immediately after the first watch:
+                        </p>
+                        <div class="text-xs text-slate-400 italic bg-slate-900/80 p-2.5 rounded-lg border border-slate-800">
+                            "Networking isn't an ocean; it's small islands. You don't need new strangers—reviving dormant ties yields more creative trust. Find odd-numbered groups and share genuine interests."
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800/80 space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">Pass 2: Micro Forensic Check</span>
+                            <span class="text-[10px] text-slate-500 font-mono">Precision Drill</span>
+                        </div>
+                        <ul class="text-xs text-slate-300 space-y-1.5 list-disc list-inside">
+                            <li><strong class="text-white">Why odd numbers?</strong> People naturally pair off in twos, leaving one person seeking a partner.</li>
+                            <li><strong class="text-white">Why dormant ties?</strong> Established trust endures, creating friction-free creative exchange without transactional pressure.</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- TAB 2: THE EXECUTIVE TAKE (STAGE 3) -->
+        <div id="tab-stage2" class="tab-content max-w-5xl mx-auto space-y-5 hidden">
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-3">
+                <span class="text-xs font-bold uppercase tracking-wider text-purple-400 bg-purple-950 border border-purple-800 px-2.5 py-0.5 rounded-md">Stage 3: Conversational Currency Builder</span>
+                <h2 class="text-lg md:text-xl font-bold text-white">Formulate "The Executive Take" (Onestein's Perspective)</h2>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                    Senior executives at global conferences never just summarize articles or videos—they evaluate them with an authentic, commercially grounded critique and link them directly to their market territory.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Strategic Critique -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-3 shadow-lg">
+                    <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+                        <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                            <span>⚖️ C-Suite Strategic Critique</span>
+                        </h3>
+                        <span class="text-[10px] text-slate-400 font-mono">Reality Check</span>
+                    </div>
+
+                    <div class="space-y-3 text-xs">
+                        <div class="bg-emerald-950/30 border border-emerald-900/50 p-3 rounded-xl space-y-1">
+                            <span class="font-bold text-emerald-400 uppercase text-[10px]">What Genuinely Works for CGBO</span>
+                            <p class="text-slate-300 leading-relaxed">
+                                <strong>Reinvigorating Dormant Ties:</strong> High efficiency, established trust, and immediate relevance. Reconnecting with overseas executives from prior M&A or regulatory rounds unlocks deals without cold awkwardness.
+                            </p>
+                        </div>
+
+                        <div class="bg-rose-950/30 border border-rose-900/50 p-3 rounded-xl space-y-1">
+                            <span class="font-bold text-rose-400 uppercase text-[10px]">What Falls Flat at C-Level</span>
+                            <p class="text-slate-300 leading-relaxed">
+                                <strong>"Gamifying as a Video Game Character":</strong> Trivial and gimmicky for senior leadership. Boardrooms and VIP dinners demand authentic gravitas, acute market insight, and relaxed confidence—not artificial gamification.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dunamu / APAC Regional Angle -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-3 shadow-lg">
+                    <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+                        <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                            <span>🌏 Dunamu APAC Regional Angle</span>
+                        </h3>
+                        <span class="text-[10px] text-sky-400 font-mono">Home Turf Currency</span>
+                    </div>
+
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        When conversing with Western executives in Singapore, New York, or Tokyo, Onestein holds an asymmetric cultural advantage. Use this talking point:
+                    </p>
+
+                    <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800/80 space-y-2 text-xs">
+                        <div class="text-sky-400 font-semibold text-[11px]">The Asian Institutional Dynamic:</div>
+                        <p class="text-slate-300 italic leading-relaxed">
+                            "Western networking leans heavily on fast elevator pitches and cold introductions. In Asian institutional finance, deals are mediated almost exclusively by dormant trust and warm institutional introductions. The HBR insight on dormant ties is actually how Asian business has operated for decades."
+                        </p>
+                        <div class="pt-2 flex justify-end">
+                            <button onclick="speakText('Western networking leans heavily on fast elevator pitches and cold introductions. In Asian institutional finance, deals are mediated almost exclusively by dormant trust and warm institutional introductions.')" class="bg-slate-800 hover:bg-slate-700 text-sky-300 border border-slate-700 px-3 py-1 rounded-lg text-xs font-medium transition flex items-center gap-1 touch-manipulate">
+                                🔊 Hear Executive Phrasing
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Executive Conversation Starters -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-3 shadow-lg">
+                <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                    <span>💬 3 Field-Ready Conversational Openers for Onestein</span>
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                    <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800 space-y-1.5">
+                        <span class="text-sky-400 font-bold text-[10px] uppercase">1. Cocktail Opener</span>
+                        <p class="text-slate-200 italic">"I saw you were part of that panel on cross-border clearing. What's your read on how Asian liquidity will react?"</p>
+                    </div>
+                    <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800 space-y-1.5">
+                        <span class="text-emerald-400 font-bold text-[10px] uppercase">2. Dormant Tie Reconnection</span>
+                        <p class="text-slate-200 italic">"It’s been almost two years since our Singapore sessions—I wanted to check in and see what's top of mind for your desk."</p>
+                    </div>
+                    <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800 space-y-1.5">
+                        <span class="text-purple-400 font-bold text-[10px] uppercase">3. Dinner Counter-Take</span>
+                        <p class="text-slate-200 italic">"Rather than forced small talk, let's talk about the real bottleneck: how institutional custody handles multi-jurisdiction audits."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: TARGET CURRICULUM (14 UNITS) -->
+        <div id="tab-curriculum" class="tab-content max-w-7xl mx-auto space-y-5 hidden">
+            <!-- Filter & Search Controls Header -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                    <h2 class="text-lg md:text-xl font-bold text-white flex items-center gap-2">
+                        <span>Target Curriculum: High-Velocity Conversational English</span>
+                        <span class="text-xs bg-emerald-500/20 text-emerald-400 px-2.5 py-0.5 rounded-full border border-emerald-500/30">100% Zero-Jargon</span>
+                    </h2>
+                    <p class="text-xs text-slate-400 mt-1">
+                        Sourced directly from Reference Guide (Sections 2, 4, 17) + Fresh C-Suite units. 100% blacklist compliant.
+                    </p>
+                </div>
+                <!-- Search Box -->
+                <div class="flex items-center gap-2 w-full md:w-auto">
+                    <input type="text" id="vocab-search" oninput="filterCurriculum()" placeholder="Search vocabulary or Korean..." class="bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 w-full md:w-64">
+                    <button onclick="speakText('Curriculum loaded with 14 target units for Onestein.')" class="bg-sky-600/20 hover:bg-sky-600/30 text-sky-400 border border-sky-500/30 px-3 py-2 rounded-xl text-xs font-medium transition flex items-center gap-1.5 shrink-0 touch-manipulate">
+                        🔊 Read
+                    </button>
+                </div>
+            </div>
+
+            <!-- Category Filter Chips -->
+            <div class="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+                <button onclick="setCurriculumFilter('all')" id="filter-all" class="vocab-filter-btn active-filter px-3.5 py-1.5 rounded-lg text-xs font-medium bg-slate-900 border border-slate-800 text-slate-300 hover:text-white transition shrink-0 touch-manipulate">All (14)</button>
+                <button onclick="setCurriculumFilter('Expression')" id="filter-Expression" class="vocab-filter-btn px-3.5 py-1.5 rounded-lg text-xs font-medium bg-slate-900 border border-slate-800 text-slate-300 hover:text-white transition shrink-0 touch-manipulate">Expressions (3)</button>
+                <button onclick="setCurriculumFilter('Verb')" id="filter-Verb" class="vocab-filter-btn px-3.5 py-1.5 rounded-lg text-xs font-medium bg-slate-900 border border-slate-800 text-slate-300 hover:text-white transition shrink-0 touch-manipulate">Verbs (3)</button>
+                <button onclick="setCurriculumFilter('Adverb')" id="filter-Adverb" class="vocab-filter-btn px-3.5 py-1.5 rounded-lg text-xs font-medium bg-slate-900 border border-slate-800 text-slate-300 hover:text-white transition shrink-0 touch-manipulate">Adverbs (2)</button>
+                <button onclick="setCurriculumFilter('Adjective')" id="filter-Adjective" class="vocab-filter-btn px-3.5 py-1.5 rounded-lg text-xs font-medium bg-slate-900 border border-slate-800 text-slate-300 hover:text-white transition shrink-0 touch-manipulate">Adjectives (2)</button>
+                <button onclick="setCurriculumFilter('Preposition')" id="filter-Preposition" class="vocab-filter-btn px-3.5 py-1.5 rounded-lg text-xs font-medium bg-slate-900 border border-slate-800 text-slate-300 hover:text-white transition shrink-0 touch-manipulate">Prepositions (2)</button>
+                <button onclick="setCurriculumFilter('Pattern')" id="filter-Pattern" class="vocab-filter-btn px-3.5 py-1.5 rounded-lg text-xs font-medium bg-slate-900 border border-slate-800 text-slate-300 hover:text-white transition shrink-0 touch-manipulate">Sentence Patterns (2)</button>
+            </div>
+
+            <!-- Dynamic 14-Unit Grid -->
+            <div id="curriculum-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                <!-- Dynamically populated via JavaScript -->
+            </div>
+        </div>
+
+        <!-- TAB 4: NETWORKING SPARRING (STAGE 5) -->
+        <div id="tab-sparring" class="tab-content max-w-5xl mx-auto space-y-5 hidden">
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                    <h2 class="text-lg md:text-xl font-bold text-white flex items-center gap-2">
+                        <span>🥂 Stage 5: Live Networking Sparring</span>
+                        <span class="text-xs bg-indigo-500/20 text-indigo-400 px-2.5 py-0.5 rounded-full border border-indigo-500/30">Coach Frank vs. Onestein</span>
+                    </h2>
+                    <p class="text-xs text-slate-400 mt-1">
+                        Two high-stakes networking environments simulating overseas summits: Standing Cocktail Mixer (90 sec) & VIP Dinner Table (3 min).
+                    </p>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-2">
+                    <button onclick="toggleAllDialogueKr()" id="toggle-dialogue-kr-btn" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-3 py-1.5 rounded-xl text-xs font-semibold transition flex items-center gap-1.5 touch-manipulate">
+                        🇰🇷 Show All Korean
+                    </button>
+                    <button onclick="setScenario('cocktail')" id="scen-cocktail" class="scen-btn bg-sky-600 text-white px-3 py-1.5 rounded-xl text-xs font-semibold transition touch-manipulate">Scenario A: Cocktail Mixer</button>
+                    <button onclick="setScenario('dinner')" id="scen-dinner" class="scen-btn bg-slate-800 text-slate-300 hover:bg-slate-700 px-3 py-1.5 rounded-xl text-xs font-semibold transition touch-manipulate">Scenario B: VIP Dinner</button>
+                </div>
+            </div>
+
+            <!-- Dialogue Turns Stream -->
+            <div class="space-y-3.5" id="dialogue-stream-container">
+                <!-- Dynamically populated via JS -->
+            </div>
+        </div>
+
+        <!-- TAB 5: GRADUATED DICTATION LAB (12 QUESTIONS) -->
+        <div id="tab-dictation" class="tab-content max-w-5xl mx-auto space-y-5 hidden">
+            <!-- Score & Progress Deck -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                    <h2 class="text-lg md:text-xl font-bold text-white flex items-center gap-2">
+                        <span>📝 Stage 6: Graduated Dictation Lab</span>
+                        <span class="text-xs bg-emerald-500/20 text-emerald-400 px-2.5 py-0.5 rounded-full border border-emerald-500/30">12 Audio Exercises</span>
+                    </h2>
+                    <p class="text-xs text-slate-400 mt-1">
+                        Listen to fast native executive speech and type the exact missing keyword. Progress through Easy, Intermediate, and Advanced tiers.
+                    </p>
+                </div>
+
+                <div class="flex items-center gap-3 w-full md:w-auto justify-between md:justify-end">
+                    <div class="bg-slate-950 border border-slate-800 px-4 py-2 rounded-xl text-right">
+                        <div class="text-[9px] uppercase font-bold text-slate-400 tracking-wider">Mastery Score</div>
+                        <div id="dictation-score-display" class="text-base md:text-lg font-mono font-bold text-emerald-400">0 / 12</div>
+                    </div>
+                    <button onclick="checkAllDictation()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs px-4 py-2.5 rounded-xl transition shadow-lg shadow-emerald-600/20 touch-manipulate">
+                        Verify All
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dictation Exercises Stream -->
+            <div class="space-y-5" id="dictation-container">
+                <!-- Dynamically populated via JS -->
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        // --- DATASET: 4 ACOUSTIC LANDMINES (PRE-LISTENING) ---
+        const ACOUSTIC_PRIMING_DATA = [
+            {
+                id: 1,
+                phrase: "Said almost no one ever",
+                phonetic: "/sɛ-dɔl-moʊst noʊ-wʌ-nɛ-vɚ/",
+                timestamp: "00:04",
+                rule: "Flap T/D + Liaison: The final /d/ in 'said' taps into 'almost' (/sɛ-dɔl/), and the /n/ in 'one' links directly to 'ever' (/nɛ-vɚ/)."
+            },
+            {
+                id: 2,
+                phrase: "Look for islands",
+                phonetic: "/lʊk-fɚ-aɪ-ləndz/",
+                timestamp: "00:30",
+                rule: "Schwa Reduction: 'For' collapses to neutral /fɚ/, creating a rapid vowel-to-vowel glide into 'islands'."
+            },
+            {
+                id: 3,
+                phrase: "Dormant ties",
+                phonetic: "/dɔr-mən-taɪz/",
+                timestamp: "01:01",
+                rule: "Glottal Stop: The final /t/ of 'dormant' is unreleased before the following /t/ in 'ties', eliminating awkward double plosives."
+            },
+            {
+                id: 4,
+                phrase: "Nothing but rain these past few days",
+                phonetic: "/nʌ-θɪŋ-bət-reɪn ðiz-pæs-fju-deɪz/",
+                timestamp: "02:25",
+                rule: "Consonant Cluster Elision: The /t/ in 'but' becomes a glottal catch, and the final /t/ in 'past' completely drops before 'few'."
+            }
+        ];
+
+        // --- DATASET: 14 FRESH CURRICULUM UNITS ---
+        const CURRICULUM_DATA = [
+            {
+                id: 1,
+                term: "Read the room",
+                category: "Expression",
+                enDef: "To observe, assess, and understand the subtle emotional tone, mood, and social dynamics of a group before speaking or pitching.",
+                krDef: "(말이나 제안을 꺼내기 전에) 방 안의 분위기를 파악하다, 청중의 기류를 읽다",
+                ex1: "Before pitching our institutional custody model, Onestein took a moment to read the room.",
+                ex2: "A skilled executive knows when to push an agenda and when to read the room and dial it back.",
+                nuance: "Crucial for international conferences. Distinguishes aggressive cold-pitchers from emotionally intelligent leaders.",
+                synonyms: "Assess the atmosphere, gauge sentiment, take the temperature",
+                antonyms: "Be tone-deaf, ignore social cues, blurt out"
+            },
+            {
+                id: 2,
+                term: "Strike a chord",
+                category: "Expression",
+                enDef: "To evoke an emotional resonance, shared interest, or deep sense of agreement with an audience or counterparty.",
+                krDef: "(상대방의) 공감을 불러일으키다, 심금을 울리다, 깊은 공감대를 형성하다",
+                ex1: "Dunamu's focus on transparent regulatory architecture really struck a chord with European fund managers.",
+                ex2: "His comments regarding clearing latency struck a chord with the institutional market-makers at the table.",
+                nuance: "Executive relationship idiom used to describe when a value proposition genuinely resonates with stakeholders.",
+                synonyms: "Resonate deeply, hit home, strike a responsive chord",
+                antonyms: "Fall on deaf ears, miss the mark, alienate"
+            },
+            {
+                id: 3,
+                term: "Top of mind",
+                category: "Expression",
+                enDef: "The primary priority, dominant concern, or immediate focus occupying an executive's active thoughts.",
+                krDef: "(현재 가장 중요하게) 머릿속에 가장 먼저 떠오르는, 최우선 관심사인",
+                ex1: "Cross-border tax clarity remains top of mind for all overseas asset allocators.",
+                ex2: "When meeting foreign partners in Singapore, counterparty liquidity risk was top of mind for everyone.",
+                nuance: "Natural conversational phrase used to inquire about another executive's primary strategic focus.",
+                synonyms: "Foremost in mind, chief priority, central concern",
+                antonyms: "On the back burner, forgotten, secondary"
+            },
+            {
+                id: 4,
+                term: "Cultivate",
+                category: "Verb",
+                enDef: "To deliberately develop, nurture, and deepen professional relationships, networks, or market presence over time.",
+                krDef: "(인맥/관계/사업 기회를) 공들여 구축하다, 지속적으로 발전시키다",
+                ex1: "Onestein spent three years cultivating direct relationships with Asian institutional custodians.",
+                ex2: "A major conference is an opportunity to cultivate long-term partnerships, not just close quick deals.",
+                nuance: "Signals long-term, high-trust relationship management rather than superficial transactional networking.",
+                synonyms: "Nurture, develop, foster, build patiently",
+                antonyms: "Neglect, burn bridges, destroy"
+            },
+            {
+                id: 5,
+                term: "Convey",
+                category: "Verb",
+                enDef: "To communicate a strategic perspective, stance, or corporate intention clearly and effectively to others.",
+                krDef: "(생각/취지/메시지를) 명확하게 전달하다, 표현하다",
+                ex1: "During his opening remarks, Onestein conveyed Dunamu's commitment to compliance excellence.",
+                ex2: "It is essential to convey technical reliability without overwhelming non-technical board members.",
+                nuance: "High-register executive communication verb preferred over generic 'tell' or 'explain'.",
+                synonyms: "Communicate, express, transmit, impart",
+                antonyms: "Muddle, obscure, withhold"
+            },
+            {
+                id: 6,
+                term: "Navigate",
+                category: "Verb",
+                enDef: "To manage, steer through, and resolve complex commercial dynamics, regulatory ambiguities, or social environments adeptly.",
+                krDef: "(복잡한 상황/규제 환경/대인 관계를) 능숙하게 헤쳐나가다, 조율하다",
+                ex1: "Our global desk had to navigate overlapping regulatory mandates between London and Singapore.",
+                ex2: "Onestein skillfully navigated the dinner conversation between competing liquidity providers.",
+                nuance: "Conveys calm leadership amid diplomatic or corporate complexity.",
+                synonyms: "Steer through, maneuver, handle expertly",
+                antonyms: "Falter, drift aimlessly, get lost"
+            },
+            {
+                id: 7,
+                term: "Organically",
+                category: "Adverb",
+                enDef: "In a natural, unforced, and evolutionary manner, without artificial contrivance or aggressive push.",
+                krDef: "자연스럽게, 인위적이지 않게, 점진적으로",
+                ex1: "Their commercial partnership developed organically following casual discussions at Consensus.",
+                ex2: "We prefer our institutional order book to grow organically through superior market depth.",
+                nuance: "Executive framing used to contrast genuine market traction against subsidized or forced growth.",
+                synonyms: "Naturally, spontaneously, incrementally",
+                antonyms: "Artificially, forcedly, unnaturally"
+            },
+            {
+                id: 8,
+                term: "Candidly",
+                category: "Adverb",
+                enDef: "In an honest, direct, and straightforward manner that strips away public relations fluff.",
+                krDef: "솔직하게, 기탄없이, 가감 없이",
+                ex1: "Speaking candidly, our treasury desk is unwilling to accept unhedged foreign exchange volatility.",
+                ex2: "Onestein shared candidly that regulatory approvals in that jurisdiction would take at least six months.",
+                nuance: "Used by C-suite executives to transition from polite diplomatic banter to authentic, actionable truth.",
+                synonyms: "Frankly, forthrightly, honestly, plainly",
+                antonyms: "Evasively, diplomatically, deceitfully"
+            },
+            {
+                id: 9,
+                term: "Dormant",
+                category: "Adjective",
+                enDef: "Temporarily inactive, suspended, or unutilized, but retaining full inherent capacity for revival.",
+                krDef: "(잠시 활동을 멈춘) 휴면 상태의, 잠재되어 있는",
+                ex1: "Reviving dormant institutional ties often yields far higher ROI than cold-calling new prospects.",
+                ex2: "The secondary clearing account remained dormant until cross-border volumes surged.",
+                nuance: "From the HBR video framework. Refers to past relationships that possess durable trust waiting to be awakened.",
+                synonyms: "Inactive, latent, resting, quiescent",
+                antonyms: "Active, operational, bustling"
+            },
+            {
+                id: 10,
+                term: "Receptive",
+                category: "Adjective",
+                enDef: "Open, willing, and favorably inclined to consider new proposals, perspectives, or commercial terms.",
+                krDef: "(새로운 제안/아이디어에) 수용적인, 개방적인, 호의적인",
+                ex1: "The European clearing partners were highly receptive to Dunamu's risk-allocation framework.",
+                ex2: "Once we addressed settlement latency, the foreign investment committee became much more receptive.",
+                nuance: "Strategic adjective used to gauge whether a counterparty is ready to negotiate constructively.",
+                synonyms: "Open-minded, amenable, welcoming, favorably disposed",
+                antonyms: "Dismissive, hostile, closed, resistant"
+            },
+            {
+                id: 11,
+                term: "Apropos of",
+                category: "Preposition",
+                enDef: "With reference to; concerning; prompted appropriately by an ongoing conversational topic.",
+                krDef: "~에 관하여, ~와 관련하여 (자연스러운 화제 전환)",
+                ex1: "Apropos of your question on liquidity depth, Dunamu recently upgraded its Asian matching engine.",
+                ex2: "Apropos of cross-border compliance, how is your London desk handling overlapping audit rules?",
+                nuance: "Sophisticated executive conversational bridge. Allows a smooth, intellectual pivot without awkward pauses.",
+                synonyms: "Concerning, regarding, with respect to, speaking of",
+                antonyms: "Irrespective of, unrelated to"
+            },
+            {
+                id: 12,
+                term: "In the context of",
+                category: "Preposition",
+                enDef: "In the specific setting, circumstances, or framework that surrounds and clarifies a particular statement or decision.",
+                krDef: "~라는 맥락에서, ~의 관점에서",
+                ex1: "In the context of tightening capital requirements, our collateral buffers represent a prudent safeguard.",
+                ex2: "Their valuation adjustment makes complete sense in the context of recent interest rate shifts.",
+                nuance: "Essential framing phrase for establishing business rationale and disarming misunderstandings.",
+                synonyms: "Within the framework of, viewing through the lens of",
+                antonyms: "In isolation, out of context"
+            },
+            {
+                id: 13,
+                term: "I couldn't help but overhear your point on [Topic]—how does that play out in [Region/Market]?",
+                category: "Pattern",
+                enDef: "A natural, high-confidence conversational entry pattern for joining an ongoing group discussion without awkwardness.",
+                krDef: "[주제]에 대해 말씀하시는 것을 들었는데, 그 부분이 [지역/시장]에서는 어떻게 전개되고 있습니까?",
+                ex1: "I couldn't help but overhear your point on institutional custody—how does that play out in the Asian market?",
+                ex2: "I couldn't help but overhear your point on settlement speed—how does that play out under European rules?",
+                nuance: "The ultimate conference networking opener. Respectful, intellectually curious, and non-intrusive.",
+                synonyms: "Eavesdrop-to-engage pattern, polite entry bridge",
+                antonyms: "Interrupting rudely, aggressive cold-pitch"
+            },
+            {
+                id: 14,
+                term: "Given the current focus on [Topic], what is currently top of mind for your team?",
+                category: "Pattern",
+                enDef: "An authoritative question pattern that shifts the spotlight to the counterparty, allowing you to gauge their true priorities.",
+                krDef: "현재 [주제]에 대한 관심이 집중되는 상황에서, 귀사 팀의 최우선 관심사는 무엇입니까?",
+                ex1: "Given the current focus on cross-border clearing, what is currently top of mind for your team?",
+                ex2: "Given the current focus on digital asset regulation, what is currently top of mind for your executive board?",
+                nuance: "Executive diagnostic pattern. Puts the other person at ease and surfaces valuable commercial intelligence.",
+                synonyms: "Priority inquiry frame, executive discovery prompt",
+                antonyms: "Self-centered pitching, one-way lecturing"
+            }
+        ];
+
+        // --- DATASET: NETWORKING SPARRING (STAGE 5) ---
+        const SPARRING_DATA = {
+            cocktail: [
+                {
+                    speaker: "marcus",
+                    name: "Marcus (Head of Prime Allocation, Brevan Asset)",
+                    role: "Odd-Numbered Group Standout",
+                    text: "...honestly, the spreads in European digital assets right now are just absurd. We need better liquidity corridors.",
+                    kr: "...솔직히 지금 유럽 디지털 자산 스프레드는 터무니없이 넓습니다. 더 견고한 유동성 회랑이 절실해요."
+                },
+                {
+                    speaker: "onestein",
+                    name: "Onestein (Dunamu CGBO)",
+                    role: "Dunamu CGBO",
+                    text: "I couldn't help but overhear your point on liquidity spreads—how does that play out when you route orders into Asian hours? I'm Onestein, CGBO at Dunamu.",
+                    kr: "유동성 스프레드에 관해 말씀하시는 것을 들었습니다만, 아시아 시장 시간대로 주문을 라우팅할 때는 그 부분이 어떻게 전개됩니까? 저는 두나무의 CGBO 온스타인입니다."
+                },
+                {
+                    speaker: "marcus",
+                    name: "Marcus (Head of Prime Allocation, Brevan Asset)",
+                    role: "Odd-Numbered Group Standout",
+                    text: "Nice to meet you, Onestein. Well, candidly, our London desk struggles with settlement latency across Asian nodes. We usually see slippage widen after 2 PM UTC.",
+                    kr: "반갑습니다, 온스타인 씨. 솔직히(candidly) 말씀드리면, 저희 런던 데스크가 아시아 노드와의 결제 지연 문제로 애를 먹고 있습니다. 보통 UTC 기준 오후 2시 이후에는 슬리피지가 크게 벌어지더군요."
+                },
+                {
+                    speaker: "onestein",
+                    name: "Onestein (Dunamu CGBO)",
+                    role: "Dunamu CGBO",
+                    text: "That strikes a chord with what we've heard from other European desks. In the context of 24/7 matching engines, we spent the last year cultivating direct sub-millisecond corridors to eliminate that exact friction.",
+                    kr: "다른 유럽 데스크들로부터 들었던 이야기와 정확히 공감대를 형성하는(strikes a chord) 부분이군요. 24시간 연중무휴 매칭 엔진이라는 맥락에서(in the context of), 당사는 바로 그 체결 마찰을 없애기 위해 지난 1년간 밀리초 이하의 직통 회랑을 공들여 구축해(cultivating) 왔습니다."
+                },
+                {
+                    speaker: "marcus",
+                    name: "Marcus (Head of Prime Allocation, Brevan Asset)",
+                    role: "Odd-Numbered Group Standout",
+                    text: "Really? That would be top of mind for our chief investment officer. Are you open to running connectivity trials next month?",
+                    kr: "정말입니까? 그렇다면 저희 최고투자책임자(CIO)에게도 최우선 관심사(top of mind)가 되겠네요. 다음 달에 연결성 테스트를 진행해 볼 의향이 있으십니까?"
+                },
+                {
+                    speaker: "onestein",
+                    name: "Onestein (Dunamu CGBO)",
+                    role: "Dunamu CGBO",
+                    text: "Absolutely. Apropos of that, let me introduce you to our infrastructure lead tomorrow, and we can set up an initial test environment.",
+                    kr: "물론입니다. 그 점과 관련하여(apropos of), 내일 당사 인프라 총괄을 소개해 드릴 테니 초기 테스트 환경을 구축해 보시죠."
+                }
+            ],
+            dinner: [
+                {
+                    speaker: "elena",
+                    name: "Elena (Partner, Global FinTech Capital)",
+                    role: "Dinner Table Neighbor",
+                    text: "Ugh, I'm exhausted. These conference networking dinners are always so predictable—everyone either talks about the flight delays or complains about the weather.",
+                    kr: "아, 정말 피곤하네요. 이런 컨퍼런스 네트워킹 저녁 식사는 항상 너무 뻔해요. 다들 비행기 지연 이야기나 날씨 불평만 늘어놓으니까요."
+                },
+                {
+                    speaker: "onestein",
+                    name: "Onestein (Dunamu CGBO)",
+                    role: "Dunamu CGBO",
+                    text: "Candidly, Elena, I read the room and decided to skip the weather small talk tonight. Given the current focus on cross-border clearing, what is currently top of mind for your portfolio companies?",
+                    kr: "기탄없이(candidly) 말씀드리자면, Elena 씨, 저도 오늘 방 안의 기류를 읽고(read the room) 날씨 같은 시시콜콜한 잡담은 건너뛰기로 했습니다. 국경 간 청산에 관심이 집중되는 상황에서, 귀사 포트폴리오 기업들의 최우선 관심사(top of mind)는 무엇입니까?"
+                },
+                {
+                    speaker: "elena",
+                    name: "Elena (Partner, Global FinTech Capital)",
+                    role: "Dinner Table Neighbor",
+                    text: "Thank you for that! Honestly, what keeps them awake is regulatory divergence. Navigating licensing between overlapping jurisdictions is burning their runway.",
+                    kr: "그렇게 말씀해 주시니 고맙네요! 솔직히 그들의 잠을 설치게 하는 것은 각국 규제의 불일치입니다. 중첩되는 규제 관할권 사이에서 인허가를 능숙하게 헤쳐나가는(navigating) 과정에서 운영 자금이 소진되고 있어요."
+                },
+                {
+                    speaker: "onestein",
+                    name: "Onestein (Dunamu CGBO)",
+                    role: "Dunamu CGBO",
+                    text: "I see that constantly. Many Western founders try to force cold connections with regulators. We've found that reinvigorating dormant institutional ties through trusted local partners is far more effective.",
+                    kr: "저도 그런 경우를 수없이 봅니다. 많은 서구 창업자들이 규제 당국과 무리하게 차가운 접촉을 시도하곤 하죠. 저희 경험상, 신뢰받는 현지 파트너를 통해 휴면 상태의(dormant) 기관 네트워크를 다시 활성화하는 것이 훨씬 더 효과적입니다."
+                },
+                {
+                    speaker: "elena",
+                    name: "Elena (Partner, Global FinTech Capital)",
+                    role: "Dinner Table Neighbor",
+                    text: "That perspective really strikes a chord. In Asia, trust definitely develops organically rather than through brute force.",
+                    kr: "그 시각은 정말 깊은 공감을 불러일으키네요(strikes a chord). 아시아에서는 신뢰가 무리한 압박이 아니라 확실히 자연스럽고 유기적으로(organically) 형성되니까요."
+                },
+                {
+                    speaker: "onestein",
+                    name: "Onestein (Dunamu CGBO)",
+                    role: "Dunamu CGBO",
+                    text: "Precisely. If your portfolio teams want an objective briefing on Asian licensing pathways, I'd be glad to share how Dunamu navigates these standards.",
+                    kr: "정확합니다. 귀사 포트폴리오 팀들이 아시아 라이선스 경로에 대한 객관적인 브리핑을 원하신다면, 두나무가 이러한 기준들을 어떻게 조율해 가는지(navigates) 기꺼이 공유해 드리겠습니다."
+                }
+            ]
+        };
+
+        // --- DATASET: 12 GRADUATED DICTATION QUESTIONS ---
+        const DICTATION_DATA = [
+            // Tier 1: Easy (Q1-Q4)
+            { q: 1, tier: "Easy", target: "top of mind", full: "Liquidity fragmentation remains top of mind for our executive committee.", hint: "Foremost concern / primary priority (Expression)" },
+            { q: 2, tier: "Easy", target: "read the room", full: "Before introducing our commercial term sheet, we need to read the room.", hint: "Assess mood / social atmosphere (Expression)" },
+            { q: 3, tier: "Easy", target: "dormant", full: "Reconnecting with dormant institutional partners led to unexpected deal flow.", hint: "Temporarily inactive / latent (Adjective)" },
+            { q: 4, tier: "Easy", target: "candidly", full: "Speaking candidly, the valuation model fails to account for market shocks.", hint: "Frankly and straightforwardly (Adverb)" },
+
+            // Tier 2: Intermediate (Q5-Q8)
+            { q: 5, tier: "Intermediate", target: "strike a chord", full: "His analysis of cross-border latency managed to strike a chord with the board.", hint: "Resonate deeply / evoke sympathy (Expression)" },
+            { q: 6, tier: "Intermediate", target: "cultivate", full: "Senior executives spend years trying to cultivate high-trust banking relationships.", hint: "Nurture and develop over time (Verb)" },
+            { q: 7, tier: "Intermediate", target: "receptive", full: "The overseas partners were exceptionally receptive to our clearing proposal.", hint: "Open and favorably inclined (Adjective)" },
+            { q: 8, tier: "Intermediate", target: "organically", full: "The business alliance expanded organically without aggressive marketing spend.", hint: "Naturally and unforced (Adverb)" },
+
+            // Tier 3: Advanced (Q9-Q12)
+            { q: 9, tier: "Advanced", target: "apropos of", full: "Apropos of our custody framework, we recently completed external security audits.", hint: "Concerning / with reference to (Preposition)" },
+            { q: 10, tier: "Advanced", target: "navigate", full: "Our compliance team worked tirelessly to navigate conflicting regional rules.", hint: "Steer through / manage complexity (Verb)" },
+            { q: 11, tier: "Advanced", target: "convey", full: "Onestein was able to convey the strategic value of our Asian liquidity corridors.", hint: "Communicate clearly (Verb)" },
+            { q: 12, tier: "Advanced", target: "in the context of", full: "In the context of macroeconomic rate shifts, conservative reserves are essential.", hint: "Within the framework of (Preposition)" }
+        ];
+
+        // --- WEB SPEECH SYNTHESIS ENGINE ---
+        function speakText(text) {
+            speakCustom(text, 1.0);
+        }
+
+        function speakCustom(text, rate) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.rate = rate;
+                utterance.pitch = 1.0;
+                utterance.lang = 'en-US';
+                window.speechSynthesis.speak(utterance);
+            } else {
+                showToast("Web Speech API is unavailable in this browser environment.");
+            }
+        }
+
+        function escapeQuotes(str) {
+            return str.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+        }
+
+        // Custom Toast Notification (Strict Zero-Alert Guardrail)
+        function showToast(msg) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = "bg-slate-900 border border-slate-700 text-white text-xs px-4 py-3 rounded-xl shadow-2xl pointer-events-auto flex items-center justify-between gap-3 animate-fade-in";
+            toast.innerHTML = `<span>${msg}</span><button onclick="this.parentElement.remove()" class="text-slate-400 hover:text-white">✕</button>`;
+            container.appendChild(toast);
+            setTimeout(() => { if (toast.parentElement) toast.remove(); }, 3500);
+        }
+
+        // --- YOUTUBE EMBED & TIMESTAMP CONTROLLER ---
+        let usePrivacyEmbed = true;
+
+        function getEmbedUrl(seconds = 0) {
+            const domain = usePrivacyEmbed ? 'https://www.youtube-nocookie.com' : 'https://www.youtube.com';
+            return `${domain}/embed/MnrINCauK-E?start=${seconds}&rel=0&modestbranding=1`;
+        }
+
+        function seekToTimestamp(seconds) {
+            const iframe = document.getElementById('hbr-youtube-player');
+            if (iframe) {
+                iframe.src = getEmbedUrl(seconds);
+                showToast(`Jumping to bookmark: ${Math.floor(seconds/60)}:${(seconds%60).toString().padStart(2, '0')}`);
+            }
+            const extLink = document.getElementById('external-yt-link');
+            if (extLink) {
+                extLink.href = `https://www.youtube.com/watch?v=MnrINCauK-E&t=${seconds}s`;
+            }
+        }
+
+        function toggleEmbedDomain() {
+            usePrivacyEmbed = !usePrivacyEmbed;
+            const iframe = document.getElementById('hbr-youtube-player');
+            if (iframe) {
+                iframe.src = getEmbedUrl(0);
+                showToast(`Switched player domain: ${usePrivacyEmbed ? 'youtube-nocookie.com (Privacy)' : 'youtube.com (Standard)'}`);
+            }
+        }
+
+        // --- RENDER FUNCTIONS ---
+
+        // Render Stage 1 Acoustic Priming
+        function renderAcousticPriming() {
+            const container = document.getElementById('acoustic-priming-grid');
+            container.innerHTML = '';
+
+            ACOUSTIC_PRIMING_DATA.forEach(item => {
+                const card = document.createElement('div');
+                card.className = "bg-slate-950 p-3.5 rounded-xl border border-slate-800 flex flex-col justify-between space-y-2";
+
+                card.innerHTML = `
+                    <div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-white">"${item.phrase}"</span>
+                            <span class="text-[10px] text-sky-400 font-mono bg-sky-950 px-2 py-0.5 rounded border border-sky-800">⏱️ ${item.timestamp}</span>
+                        </div>
+                        <div class="text-sky-300 font-mono text-xs mt-1 font-semibold">${item.phonetic}</div>
+                        <p class="text-[11px] text-slate-400 mt-1 leading-relaxed">${item.rule}</p>
+                    </div>
+                    <div class="flex items-center gap-2 pt-2 border-t border-slate-800/80">
+                        <button onclick="speakCustom('${escapeQuotes(item.phrase)}', 0.85)" class="bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 px-2.5 py-1 rounded-lg text-[11px] font-medium transition flex items-center gap-1 touch-manipulate">
+                            🐢 0.85x
+                        </button>
+                        <button onclick="speakCustom('${escapeQuotes(item.phrase)}', 1.25)" class="bg-sky-600/30 hover:bg-sky-600/50 text-sky-300 border border-sky-500/40 px-2.5 py-1 rounded-lg text-[11px] font-medium transition flex items-center gap-1 touch-manipulate">
+                            ⚡ Fast Native (1.25x)
+                        </button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Render Stage 3 Curriculum Deck
+        let currentCurriculumFilter = 'all';
+
+        function renderCurriculum() {
+            const grid = document.getElementById('curriculum-grid');
+            const searchVal = document.getElementById('vocab-search').value.toLowerCase().trim();
+            grid.innerHTML = '';
+
+            const filtered = CURRICULUM_DATA.filter(item => {
+                const matchesFilter = (currentCurriculumFilter === 'all') || (item.category === currentCurriculumFilter);
+                const matchesSearch = item.term.toLowerCase().includes(searchVal) ||
+                                      item.enDef.toLowerCase().includes(searchVal) ||
+                                      item.krDef.toLowerCase().includes(searchVal);
+                return matchesFilter && matchesSearch;
+            });
+
+            filtered.forEach(item => {
+                const card = document.createElement('div');
+                card.className = "bg-slate-900 border border-slate-800 hover:border-slate-700 rounded-2xl p-4 md:p-5 space-y-3.5 transition flex flex-col justify-between shadow-lg";
+
+                card.innerHTML = `
+                    <div class="space-y-3">
+                        <div class="flex items-start justify-between gap-2 border-b border-slate-800 pb-2.5">
+                            <div>
+                                <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-md border ${getCategoryStyle(item.category)}">
+                                    ${item.category}
+                                </span>
+                                <h3 class="text-base md:text-lg font-bold text-white mt-1">
+                                    ${item.term}
+                                </h3>
+                            </div>
+                            <button onclick="speakText('${escapeQuotes(item.term)}')" class="bg-slate-800 hover:bg-slate-700 text-sky-400 border border-slate-700 px-2.5 py-1.5 rounded-xl text-xs font-medium transition flex items-center gap-1 shrink-0 touch-manipulate">
+                                🔊 Read
+                            </button>
+                        </div>
+
+                        <!-- English & Korean Definitions Grid -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
+                            <div class="bg-slate-950 p-3 rounded-xl border border-slate-800/80">
+                                <span class="font-bold text-sky-400 uppercase text-[10px]">English Definition</span>
+                                <p class="text-slate-200 mt-1 leading-relaxed">${item.enDef}</p>
+                            </div>
+                            <div class="bg-slate-950 p-3 rounded-xl border border-slate-800/80">
+                                <span class="font-bold text-emerald-400 uppercase text-[10px]">Korean Meaning</span>
+                                <p class="text-slate-200 mt-1 font-medium leading-relaxed">${item.krDef}</p>
+                            </div>
+                        </div>
+
+                        <!-- 2 Realistic Institutional Sample Sentences -->
+                        <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800/80 space-y-2">
+                            <span class="font-bold text-slate-400 uppercase text-[10px]">Corporate Context Sentences</span>
+                            <div class="text-xs text-slate-300 italic space-y-2">
+                                <div class="flex items-start justify-between gap-2">
+                                    <span>"1. ${item.ex1}"</span>
+                                    <button onclick="speakText('${escapeQuotes(item.ex1)}')" class="text-slate-500 hover:text-sky-400 text-[11px] shrink-0 touch-manipulate">🔊</button>
+                                </div>
+                                <div class="flex items-start justify-between gap-2">
+                                    <span>"2. ${item.ex2}"</span>
+                                    <button onclick="speakText('${escapeQuotes(item.ex2)}')" class="text-slate-500 hover:text-sky-400 text-[11px] shrink-0 touch-manipulate">🔊</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Nuances & Synonyms -->
+                    <div class="pt-2.5 border-t border-slate-800 text-[11px] text-slate-400 space-y-1">
+                        <div><strong class="text-slate-300">Executive Nuance:</strong> ${item.nuance}</div>
+                        <div class="flex flex-wrap gap-x-3 gap-y-1">
+                            <span><strong class="text-slate-300">Synonyms:</strong> ${item.synonyms}</span>
+                            <span><strong class="text-slate-300">Antonyms:</strong> ${item.antonyms}</span>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function getCategoryStyle(cat) {
+            switch(cat) {
+                case 'Expression': return 'bg-sky-950 text-sky-400 border-sky-800';
+                case 'Verb': return 'bg-emerald-950 text-emerald-400 border-emerald-800';
+                case 'Adverb': return 'bg-purple-950 text-purple-400 border-purple-800';
+                case 'Adjective': return 'bg-amber-950 text-amber-400 border-amber-800';
+                case 'Preposition': return 'bg-indigo-950 text-indigo-400 border-indigo-800';
+                case 'Pattern': return 'bg-rose-950 text-rose-400 border-rose-800';
+                default: return 'bg-slate-800 text-slate-300 border-slate-700';
+            }
+        }
+
+        function setCurriculumFilter(cat) {
+            currentCurriculumFilter = cat;
+            document.querySelectorAll('.vocab-filter-btn').forEach(btn => btn.classList.remove('active-filter'));
+            document.getElementById('filter-' + cat).classList.add('active-filter');
+            renderCurriculum();
+        }
+
+        function filterCurriculum() {
+            renderCurriculum();
+        }
+
+        // Render Stage 5 Networking Sparring
+        let showDialogueKr = false;
+        let activeScenario = 'cocktail';
+
+        function renderSparring() {
+            const container = document.getElementById('dialogue-stream-container');
+            container.innerHTML = '';
+
+            const activeTurns = SPARRING_DATA[activeScenario];
+
+            activeTurns.forEach((line, index) => {
+                const isOnestein = line.speaker === 'onestein';
+                const card = document.createElement('div');
+                card.className = `p-4 rounded-2xl border transition ${isOnestein ? 'bg-sky-950/20 border-sky-900/40' : 'bg-slate-900 border-slate-800'}`;
+
+                card.innerHTML = `
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
+                        <div class="space-y-1 w-full">
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs font-bold ${isOnestein ? 'text-sky-400' : 'text-indigo-400'}">${line.name}</span>
+                                <span class="text-[10px] text-slate-500 uppercase font-mono">Turn ${index + 1} • ${line.role}</span>
+                            </div>
+                            <p class="text-xs md:text-sm text-slate-100 font-medium leading-relaxed">"${line.text}"</p>
+                            <p class="text-xs text-slate-400 mt-1 leading-relaxed ${showDialogueKr ? 'block' : 'hidden'}" id="dialogue-kr-${index}">
+                                ↳ ${line.kr}
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-2 shrink-0">
+                            <button onclick="toggleSingleLineKr(${index})" class="text-[11px] bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 px-2.5 py-1 rounded-lg touch-manipulate">
+                                🇰🇷 KR
+                            </button>
+                            <button onclick="speakText('${escapeQuotes(line.text)}')" class="text-xs bg-sky-600 hover:bg-sky-500 text-white px-3 py-1.5 rounded-lg transition font-medium flex items-center gap-1 shadow-md shadow-sky-600/20 touch-manipulate">
+                                🔊 Audio
+                            </button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function setScenario(scen) {
+            activeScenario = scen;
+            document.querySelectorAll('.scen-btn').forEach(btn => {
+                btn.classList.remove('bg-sky-600', 'text-white');
+                btn.classList.add('bg-slate-800', 'text-slate-300');
+            });
+            document.getElementById('scen-' + scen).classList.remove('bg-slate-800', 'text-slate-300');
+            document.getElementById('scen-' + scen).classList.add('bg-sky-600', 'text-white');
+            renderSparring();
+        }
+
+        function toggleAllDialogueKr() {
+            showDialogueKr = !showDialogueKr;
+            const btn = document.getElementById('toggle-dialogue-kr-btn');
+            btn.textContent = showDialogueKr ? '🇰🇷 Hide All Korean' : '🇰🇷 Show All Korean';
+            renderSparring();
+        }
+
+        function toggleSingleLineKr(index) {
+            const el = document.getElementById(`dialogue-kr-${index}`);
+            if (el) el.classList.toggle('hidden');
+        }
+
+        // Render Stage 6 Graduated Dictation Lab (12 Questions)
+        function renderDictationLab() {
+            const container = document.getElementById('dictation-container');
+            container.innerHTML = '';
+
+            let currentTier = '';
+
+            DICTATION_DATA.forEach(q => {
+                if (q.tier !== currentTier) {
+                    currentTier = q.tier;
+                    const tierHeader = document.createElement('div');
+                    tierHeader.className = "flex items-center gap-2 pt-2 border-b border-slate-800 pb-2";
+                    let badgeColor = currentTier === 'Easy' ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' : currentTier === 'Intermediate' ? 'bg-amber-500/20 text-amber-400 border-amber-500/30' : 'bg-rose-500/20 text-rose-400 border-rose-500/30';
+                    
+                    tierHeader.innerHTML = `<span class="text-xs font-bold uppercase px-3 py-0.5 rounded-full border ${badgeColor}">${currentTier} Tier</span> <span class="text-xs text-slate-400">Questions ${currentTier === 'Easy' ? '1-4' : currentTier === 'Intermediate' ? '5-8' : '9-12'}</span>`;
+                    container.appendChild(tierHeader);
+                }
+
+                const regex = new RegExp(q.target, 'gi');
+                const sentenceWithBlank = q.full.replace(regex, `<input type="text" id="dict-input-${q.q}" data-answer="${q.target.toLowerCase()}" class="bg-slate-950 border border-slate-700 focus:border-sky-500 rounded-lg px-2.5 py-1 text-xs text-white font-mono w-44 sm:w-60 mx-1 focus:outline-none" placeholder="Target phrase...">`);
+
+                const card = document.createElement('div');
+                card.className = "bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-2.5";
+
+                card.innerHTML = `
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                        <div class="space-y-1 w-full">
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs font-bold text-sky-400">Question ${q.q}</span>
+                                <span class="text-[10px] text-slate-500">Hint: ${q.hint}</span>
+                            </div>
+                            <div class="text-xs md:text-sm text-slate-100 flex flex-wrap items-center leading-loose">
+                                "${sentenceWithBlank}"
+                            </div>
+                            <div id="dict-feedback-${q.q}" class="text-xs font-semibold hidden mt-1"></div>
+                        </div>
+                        <div class="flex items-center gap-2 shrink-0">
+                            <button onclick="speakText('${escapeQuotes(q.full)}')" class="bg-slate-800 hover:bg-slate-700 text-sky-300 border border-slate-700 px-3 py-1.5 rounded-lg text-xs font-medium transition flex items-center gap-1 touch-manipulate">
+                                🔊 Audio
+                            </button>
+                            <button onclick="revealDictationAnswer(${q.q})" class="bg-slate-800 hover:bg-slate-700 text-slate-400 border border-slate-700 px-2.5 py-1.5 rounded-lg text-xs transition touch-manipulate">
+                                Reveal
+                            </button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function checkAllDictation() {
+            let score = 0;
+            DICTATION_DATA.forEach(q => {
+                const input = document.getElementById(`dict-input-${q.q}`);
+                const feedback = document.getElementById(`dict-feedback-${q.q}`);
+                const userVal = input.value.trim().toLowerCase();
+                const targetVal = input.getAttribute('data-answer').toLowerCase();
+
+                feedback.classList.remove('hidden', 'text-emerald-400', 'text-rose-400');
+
+                if (userVal === targetVal) {
+                    score++;
+                    input.className = "bg-emerald-950/60 border border-emerald-500 rounded-lg px-2.5 py-1 text-xs text-emerald-200 font-mono w-44 sm:w-60 mx-1";
+                    feedback.textContent = "✓ Correct!";
+                    feedback.classList.add('text-emerald-400');
+                } else {
+                    input.className = "bg-rose-950/60 border border-rose-500 rounded-lg px-2.5 py-1 text-xs text-rose-200 font-mono w-44 sm:w-60 mx-1";
+                    feedback.textContent = `✗ Expected: "${q.target}"`;
+                    feedback.classList.add('text-rose-400');
+                }
+            });
+
+            document.getElementById('dictation-score-display').textContent = `${score} / 12`;
+            showToast(`Dictation Evaluation: ${score}/12 questions validated.`);
+        }
+
+        function revealDictationAnswer(qNum) {
+            const input = document.getElementById(`dict-input-${qNum}`);
+            input.value = input.getAttribute('data-answer');
+            input.className = "bg-amber-950/60 border border-amber-500 rounded-lg px-2.5 py-1 text-xs text-amber-200 font-mono w-44 sm:w-60 mx-1";
+        }
+
+        // Navigation Tab Switching
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById('tab-' + tabId).classList.remove('hidden');
+
+            document.querySelectorAll('.nav-tab').forEach(btn => btn.classList.remove('tab-active'));
+            document.getElementById('tab-btn-' + tabId).classList.add('tab-active');
+        }
+
+        // 60-Minute Executive Session Timer
+        let timerSeconds = 3600;
+        let timerActive = true;
+        let timerInterval = setInterval(runTimer, 1000);
+
+        function runTimer() {
+            if (timerActive && timerSeconds > 0) {
+                timerSeconds--;
+                const m = Math.floor(timerSeconds / 60);
+                const s = timerSeconds % 60;
+                document.getElementById('timer-display').textContent = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+            }
+        }
+
+        function toggleTimer() {
+            timerActive = !timerActive;
+            const btnText = document.getElementById('timer-btn-text');
+            btnText.textContent = timerActive ? "Pause" : "Resume";
+            showToast(timerActive ? "Session timer resumed." : "Session timer paused.");
+        }
+
+        // Window Initialization
+        window.onload = function() {
+            renderAcousticPriming();
+            renderCurriculum();
+            renderSparring();
+            renderDictationLab();
+        };
+    </script>
+</body>
+</html>
