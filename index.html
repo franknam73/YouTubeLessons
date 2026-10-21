@@ -112,6 +112,34 @@
         </div>
     </header>
 
+    <!-- Dynamic YouTube Video & AI Lesson Generator Bar -->
+    <div class="bg-slate-900/90 border-b border-sky-900/50 px-4 md:px-6 py-2.5 flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3 text-xs z-15 backdrop-blur">
+        <div class="flex items-center gap-2 shrink-0">
+            <span class="bg-sky-500 text-white font-bold px-2 py-0.5 rounded text-[10px] tracking-wide uppercase">AI Engine</span>
+            <span class="text-slate-300 font-semibold">Custom Video & Lesson Generator:</span>
+        </div>
+        
+        <div class="flex-1 flex flex-col sm:flex-row items-center gap-2 w-full">
+            <div class="relative flex-1 w-full">
+                <input type="text" id="custom-yt-input" 
+                    placeholder="Paste YouTube URL or ID (e.g. https://www.youtube.com/watch?v=...)" 
+                    value="https://www.youtube.com/watch?v=MnrINCauK-E"
+                    class="w-full bg-slate-950 border border-slate-700 focus:border-sky-500 rounded-xl px-3 py-1.5 text-xs text-white placeholder-slate-500 focus:outline-none font-mono">
+            </div>
+            <input type="text" id="custom-topic-input" 
+                placeholder="Optional focus topic / title / context..." 
+                class="w-full sm:w-56 bg-slate-950 border border-slate-700 focus:border-sky-500 rounded-xl px-3 py-1.5 text-xs text-white placeholder-slate-500 focus:outline-none">
+            <div class="flex items-center gap-2 shrink-0 w-full sm:w-auto justify-end">
+                <button onclick="generateLessonFromYouTube()" id="generate-lesson-btn" class="bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-500 hover:to-blue-500 text-white px-3.5 py-1.5 rounded-xl font-bold transition flex items-center gap-1.5 shadow-md shadow-sky-600/30 touch-manipulate">
+                    <span>⚡</span> <span id="generate-btn-text">Generate Staged Lesson</span>
+                </button>
+                <button onclick="resetToHBRSample()" title="Reset to default HBR lesson" class="bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 px-2.5 py-1.5 rounded-xl font-medium transition touch-manipulate">
+                    🔄 Reset HBR
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Top Horizontal Navigation Tab Bar -->
     <nav class="bg-slate-900/95 backdrop-blur border-b border-slate-800 px-4 md:px-6 py-2 flex items-center gap-2 overflow-x-auto shrink-0 scrollbar-none z-10">
         <button onclick="switchTab('stage1')" id="tab-btn-stage1" class="nav-tab tab-active px-3.5 py-2 rounded-xl text-xs font-semibold transition border border-transparent text-slate-300 hover:bg-slate-800 shrink-0 flex items-center gap-2 touch-manipulate">
@@ -161,99 +189,99 @@
                 </div>
             </div>
 
-            <!-- Video Player & Timestamp Navigator -->
-            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-4">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800 pb-3">
-                    <div>
-                        <span class="text-xs font-bold uppercase tracking-wider text-emerald-400 bg-emerald-950 border border-emerald-800 px-2.5 py-0.5 rounded-md">Stage 2: In-Class Dual-Pass Listening</span>
-                        <h3 class="text-base font-bold text-white mt-1">HBR: Easy Networking Tips for the Networking Haters (02:49)</h3>
-                    </div>
-                    <div class="text-xs text-slate-400">
-                        Target: Watch first time <strong>without captions</strong>
-                    </div>
-                </div>
-
-                <!-- Video Frame with Enhanced Referrer Policy & Sandbox Compatibility -->
-                <div class="video-container bg-black border border-slate-800 shadow-2xl relative">
-                    <iframe id="hbr-youtube-player" 
-                        src="https://www.youtube-nocookie.com/embed/MnrINCauK-E?rel=0&modestbranding=1" 
-                        title="Harvard Business Review Networking Video" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                        referrerpolicy="strict-origin-when-cross-origin" 
-                        allowfullscreen>
-                    </iframe>
-                </div>
-
-                <!-- Embed Fallback & Direct External Link Bar -->
-                <div class="flex flex-wrap items-center justify-between gap-2 p-3 bg-slate-950/80 rounded-xl border border-slate-800 text-xs">
-                    <div class="flex items-center gap-2 text-slate-400">
-                        <span>💡 <span class="text-slate-300">If your browser security blocks embeds:</span></span>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <button onclick="toggleEmbedDomain()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 px-2.5 py-1 rounded-lg transition font-mono text-[11px] touch-manipulate">
-                            🔄 Toggle Embed Mode
-                        </button>
-                        <a id="external-yt-link" href="https://www.youtube.com/watch?v=MnrINCauK-E" target="_blank" rel="noopener noreferrer" class="bg-red-600/20 hover:bg-red-600/30 text-red-400 border border-red-500/30 px-3 py-1 rounded-lg transition font-semibold flex items-center gap-1.5 touch-manipulate">
-                            <span>▶️</span> <span>Open in YouTube App/Tab</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Timestamp Bookmarks Scrub Bar -->
-                <div class="space-y-2">
-                    <span class="text-[11px] font-bold uppercase text-slate-400 tracking-wider">Direct Timestamp Bookmarks (Tap to Jump)</span>
-                    <div class="flex flex-wrap gap-2">
-                        <button onclick="seekToTimestamp(4)" class="timestamp-btn bg-slate-950 hover:bg-slate-800 text-sky-400 border border-slate-800 px-3 py-1.5 rounded-xl text-xs font-mono transition touch-manipulate flex items-center gap-1.5">
-                            <span>⏱️ 00:04</span> <span class="text-slate-300 font-sans">"Said almost no one ever"</span>
-                        </button>
-                        <button onclick="seekToTimestamp(30)" class="timestamp-btn bg-slate-950 hover:bg-slate-800 text-sky-400 border border-slate-800 px-3 py-1.5 rounded-xl text-xs font-mono transition touch-manipulate flex items-center gap-1.5">
-                            <span>⏱️ 00:30</span> <span class="text-slate-300 font-sans">Tip 1: Look for Islands</span>
-                        </button>
-                        <button onclick="seekToTimestamp(45)" class="timestamp-btn bg-slate-950 hover:bg-slate-800 text-sky-400 border border-slate-800 px-3 py-1.5 rounded-xl text-xs font-mono transition touch-manipulate flex items-center gap-1.5">
-                            <span>⏱️ 00:45</span> <span class="text-slate-300 font-sans">Odd-Numbered Groups</span>
-                        </button>
-                        <button onclick="seekToTimestamp(61)" class="timestamp-btn bg-slate-950 hover:bg-slate-800 text-sky-400 border border-slate-800 px-3 py-1.5 rounded-xl text-xs font-mono transition touch-manipulate flex items-center gap-1.5">
-                            <span>⏱️ 01:01</span> <span class="text-slate-300 font-sans">Tip 2: Reviving Dormant Ties</span>
-                        </button>
-                        <button onclick="seekToTimestamp(95)" class="timestamp-btn bg-slate-950 hover:bg-slate-800 text-sky-400 border border-slate-800 px-3 py-1.5 rounded-xl text-xs font-mono transition touch-manipulate flex items-center gap-1.5">
-                            <span>⏱️ 01:35</span> <span class="text-slate-300 font-sans">Tip 3: Turn It Into a Game</span>
-                        </button>
-                        <button onclick="seekToTimestamp(124)" class="timestamp-btn bg-slate-950 hover:bg-slate-800 text-sky-400 border border-slate-800 px-3 py-1.5 rounded-xl text-xs font-mono transition touch-manipulate flex items-center gap-1.5">
-                            <span>⏱️ 02:04</span> <span class="text-slate-300 font-sans">Tip 4: Mutual Interest vs. Weather</span>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Comprehension Check Deck -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800/80 space-y-2">
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs font-bold text-sky-400 uppercase tracking-wider">Pass 1: Macro Elevator Summary</span>
-                            <span class="text-[10px] text-slate-500 font-mono">15-Sec Challenge</span>
+                <!-- Video Player & Timestamp Navigator -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-4">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800 pb-3">
+                        <div>
+                            <span class="text-xs font-bold uppercase tracking-wider text-emerald-400 bg-emerald-950 border border-emerald-800 px-2.5 py-0.5 rounded-md">Stage 2: In-Class Dual-Pass Listening</span>
+                            <h3 id="video-display-title" class="text-base font-bold text-white mt-1">HBR: Easy Networking Tips for the Networking Haters (02:49)</h3>
                         </div>
-                        <p class="text-xs text-slate-300 leading-relaxed">
-                            Have Onestein summarize the core thesis out loud immediately after the first watch:
-                        </p>
-                        <div class="text-xs text-slate-400 italic bg-slate-900/80 p-2.5 rounded-lg border border-slate-800">
-                            "Networking isn't an ocean; it's small islands. You don't need new strangers—reviving dormant ties yields more creative trust. Find odd-numbered groups and share genuine interests."
+                        <div class="text-xs text-slate-400">
+                            Target: Watch first time <strong>without captions</strong>
                         </div>
                     </div>
 
-                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800/80 space-y-2">
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">Pass 2: Micro Forensic Check</span>
-                            <span class="text-[10px] text-slate-500 font-mono">Precision Drill</span>
-                        </div>
-                        <ul class="text-xs text-slate-300 space-y-1.5 list-disc list-inside">
-                            <li><strong class="text-white">Why odd numbers?</strong> People naturally pair off in twos, leaving one person seeking a partner.</li>
-                            <li><strong class="text-white">Why dormant ties?</strong> Established trust endures, creating friction-free creative exchange without transactional pressure.</li>
-                        </ul>
+                    <!-- Video Frame with Enhanced Referrer Policy & Sandbox Compatibility -->
+                    <div class="video-container bg-black border border-slate-800 shadow-2xl relative">
+                        <iframe id="hbr-youtube-player" 
+                            src="https://www.youtube-nocookie.com/embed/MnrINCauK-E?rel=0&modestbranding=1" 
+                            title="YouTube Video Player" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            referrerpolicy="strict-origin-when-cross-origin" 
+                            allowfullscreen>
+                        </iframe>
                     </div>
+
+                    <!-- Embed Fallback & Direct External Link Bar -->
+                    <div class="flex flex-wrap items-center justify-between gap-2 p-3 bg-slate-950/80 rounded-xl border border-slate-800 text-xs">
+                        <div class="flex items-center gap-2 text-slate-400">
+                            <span>💡 <span class="text-slate-300">If your browser security blocks embeds (Error 153):</span></span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button onclick="toggleEmbedDomain()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 px-2.5 py-1 rounded-lg transition font-mono text-[11px] touch-manipulate">
+                                🔄 Toggle Embed Mode
+                            </button>
+                            <a id="external-yt-link" href="https://www.youtube.com/watch?v=MnrINCauK-E" target="_blank" rel="noopener noreferrer" class="bg-red-600/20 hover:bg-red-600/30 text-red-400 border border-red-500/30 px-3 py-1 rounded-lg transition font-semibold flex items-center gap-1.5 touch-manipulate">
+                                <span>▶️</span> <span>Open in YouTube App/Tab</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Timestamp Bookmarks Scrub Bar -->
+                    <div class="space-y-2">
+                        <span class="text-[11px] font-bold uppercase text-slate-400 tracking-wider">Direct Timestamp Bookmarks (Tap to Jump)</span>
+                        <div class="flex flex-wrap gap-2" id="timestamp-bookmarks-container">
+                            <button onclick="seekToTimestamp(4)" class="timestamp-btn bg-slate-950 hover:bg-slate-800 text-sky-400 border border-slate-800 px-3 py-1.5 rounded-xl text-xs font-mono transition touch-manipulate flex items-center gap-1.5">
+                                <span>⏱️ 00:04</span> <span class="text-slate-300 font-sans">"Said almost no one ever"</span>
+                            </button>
+                            <button onclick="seekToTimestamp(30)" class="timestamp-btn bg-slate-950 hover:bg-slate-800 text-sky-400 border border-slate-800 px-3 py-1.5 rounded-xl text-xs font-mono transition touch-manipulate flex items-center gap-1.5">
+                                <span>⏱️ 00:30</span> <span class="text-slate-300 font-sans">Tip 1: Look for Islands</span>
+                            </button>
+                            <button onclick="seekToTimestamp(45)" class="timestamp-btn bg-slate-950 hover:bg-slate-800 text-sky-400 border border-slate-800 px-3 py-1.5 rounded-xl text-xs font-mono transition touch-manipulate flex items-center gap-1.5">
+                                <span>⏱️ 00:45</span> <span class="text-slate-300 font-sans">Odd-Numbered Groups</span>
+                            </button>
+                            <button onclick="seekToTimestamp(61)" class="timestamp-btn bg-slate-950 hover:bg-slate-800 text-sky-400 border border-slate-800 px-3 py-1.5 rounded-xl text-xs font-mono transition touch-manipulate flex items-center gap-1.5">
+                                <span>⏱️ 01:01</span> <span class="text-slate-300 font-sans">Tip 2: Reviving Dormant Ties</span>
+                            </button>
+                            <button onclick="seekToTimestamp(95)" class="timestamp-btn bg-slate-950 hover:bg-slate-800 text-sky-400 border border-slate-800 px-3 py-1.5 rounded-xl text-xs font-mono transition touch-manipulate flex items-center gap-1.5">
+                                <span>⏱️ 01:35</span> <span class="text-slate-300 font-sans">Tip 3: Turn It Into a Game</span>
+                            </button>
+                            <button onclick="seekToTimestamp(124)" class="timestamp-btn bg-slate-950 hover:bg-slate-800 text-sky-400 border border-slate-800 px-3 py-1.5 rounded-xl text-xs font-mono transition touch-manipulate flex items-center gap-1.5">
+                                <span>⏱️ 02:04</span> <span class="text-slate-300 font-sans">Tip 4: Mutual Interest vs. Weather</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Comprehension Check Deck -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2" id="comprehension-checks-container">
+                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800/80 space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-bold text-sky-400 uppercase tracking-wider">Pass 1: Macro Elevator Summary</span>
+                                <span class="text-[10px] text-slate-500 font-mono">15-Sec Challenge</span>
+                            </div>
+                            <p class="text-xs text-slate-300 leading-relaxed">
+                                Have Onestein summarize the core thesis out loud immediately after the first watch:
+                            </p>
+                            <div id="macro-summary-text" class="text-xs text-slate-400 italic bg-slate-900/80 p-2.5 rounded-lg border border-slate-800">
+                                "Networking isn't an ocean; it's small islands. You don't need new strangers—reviving dormant ties yields more creative trust. Find odd-numbered groups and share genuine interests."
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800/80 space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">Pass 2: Micro Forensic Check</span>
+                                <span class="text-[10px] text-slate-500 font-mono">Precision Drill</span>
+                            </div>
+                            <ul id="micro-checks-list" class="text-xs text-slate-300 space-y-1.5 list-disc list-inside">
+                                <li><strong class="text-white">Why odd numbers?</strong> People naturally pair off in twos, leaving one person seeking a partner.</li>
+                                <li><strong class="text-white">Why dormant ties?</strong> Established trust endures, creating friction-free creative exchange without transactional pressure.</li>
+                            </ul>
+                        </div>
+                    </div>
+
                 </div>
 
             </div>
-
-        </div>
 
         <!-- TAB 2: THE EXECUTIVE TAKE (STAGE 3) -->
         <div id="tab-stage2" class="tab-content max-w-5xl mx-auto space-y-5 hidden">
@@ -278,14 +306,14 @@
                     <div class="space-y-3 text-xs">
                         <div class="bg-emerald-950/30 border border-emerald-900/50 p-3 rounded-xl space-y-1">
                             <span class="font-bold text-emerald-400 uppercase text-[10px]">What Genuinely Works for CGBO</span>
-                            <p class="text-slate-300 leading-relaxed">
+                            <p id="take-works-text" class="text-slate-300 leading-relaxed">
                                 <strong>Reinvigorating Dormant Ties:</strong> High efficiency, established trust, and immediate relevance. Reconnecting with overseas executives from prior M&A or regulatory rounds unlocks deals without cold awkwardness.
                             </p>
                         </div>
 
                         <div class="bg-rose-950/30 border border-rose-900/50 p-3 rounded-xl space-y-1">
                             <span class="font-bold text-rose-400 uppercase text-[10px]">What Falls Flat at C-Level</span>
-                            <p class="text-slate-300 leading-relaxed">
+                            <p id="take-falls-flat-text" class="text-slate-300 leading-relaxed">
                                 <strong>"Gamifying as a Video Game Character":</strong> Trivial and gimmicky for senior leadership. Boardrooms and VIP dinners demand authentic gravitas, acute market insight, and relaxed confidence—not artificial gamification.
                             </p>
                         </div>
@@ -307,11 +335,11 @@
 
                     <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800/80 space-y-2 text-xs">
                         <div class="text-sky-400 font-semibold text-[11px]">The Asian Institutional Dynamic:</div>
-                        <p class="text-slate-300 italic leading-relaxed">
+                        <p id="take-apac-angle-text" class="text-slate-300 italic leading-relaxed">
                             "Western networking leans heavily on fast elevator pitches and cold introductions. In Asian institutional finance, deals are mediated almost exclusively by dormant trust and warm institutional introductions. The HBR insight on dormant ties is actually how Asian business has operated for decades."
                         </p>
                         <div class="pt-2 flex justify-end">
-                            <button onclick="speakText('Western networking leans heavily on fast elevator pitches and cold introductions. In Asian institutional finance, deals are mediated almost exclusively by dormant trust and warm institutional introductions.')" class="bg-slate-800 hover:bg-slate-700 text-sky-300 border border-slate-700 px-3 py-1 rounded-lg text-xs font-medium transition flex items-center gap-1 touch-manipulate">
+                            <button id="hear-apac-angle-btn" onclick="speakText(document.getElementById('take-apac-angle-text').textContent)" class="bg-slate-800 hover:bg-slate-700 text-sky-300 border border-slate-700 px-3 py-1 rounded-lg text-xs font-medium transition flex items-center gap-1 touch-manipulate">
                                 🔊 Hear Executive Phrasing
                             </button>
                         </div>
@@ -324,7 +352,7 @@
                 <h3 class="text-sm font-bold text-white flex items-center gap-2">
                     <span>💬 3 Field-Ready Conversational Openers for Onestein</span>
                 </h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs" id="openers-grid">
                     <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800 space-y-1.5">
                         <span class="text-sky-400 font-bold text-[10px] uppercase">1. Cocktail Opener</span>
                         <p class="text-slate-200 italic">"I saw you were part of that panel on cross-border clearing. What's your read on how Asian liquidity will react?"</p>
@@ -792,11 +820,22 @@
         }
 
         // --- YOUTUBE EMBED & TIMESTAMP CONTROLLER ---
+        let currentVideoId = "MnrINCauK-E";
         let usePrivacyEmbed = true;
 
         function getEmbedUrl(seconds = 0) {
             const domain = usePrivacyEmbed ? 'https://www.youtube-nocookie.com' : 'https://www.youtube.com';
-            return `${domain}/embed/MnrINCauK-E?start=${seconds}&rel=0&modestbranding=1`;
+            return `${domain}/embed/${currentVideoId}?start=${seconds}&rel=0&modestbranding=1`;
+        }
+
+        function extractVideoId(urlOrId) {
+            if (!urlOrId) return "";
+            const str = urlOrId.trim();
+            if (/^[a-zA-Z0-9_-]{11}$/.test(str)) return str;
+            
+            // Standard youtube.com/watch?v=...
+            const vMatch = str.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i);
+            return vMatch ? vMatch[1] : "";
         }
 
         function seekToTimestamp(seconds) {
@@ -807,7 +846,7 @@
             }
             const extLink = document.getElementById('external-yt-link');
             if (extLink) {
-                extLink.href = `https://www.youtube.com/watch?v=MnrINCauK-E&t=${seconds}s`;
+                extLink.href = `https://www.youtube.com/watch?v=${currentVideoId}&t=${seconds}s`;
             }
         }
 
@@ -818,6 +857,265 @@
                 iframe.src = getEmbedUrl(0);
                 showToast(`Switched player domain: ${usePrivacyEmbed ? 'youtube-nocookie.com (Privacy)' : 'youtube.com (Standard)'}`);
             }
+        }
+
+        // --- GEMINI 3 FLASH LESSON GENERATOR ---
+        const MASTER_BLACKLIST = [
+            "on the same page", "buy time", "call it a day", "touch base", "cut corners", 
+            "play it by ear", "keep tabs on", "back to the drawing board", "a non-starter", 
+            "a deal-breaker", "off the table", "table stakes", "non-negotiable", "a sticking point", 
+            "hammer out", "level the playing field", "streamline", "address", "pivot", "delegate", 
+            "prioritize", "consolidate", "execute", "methodically", "fundamentally", "proactively", 
+            "strictly", "effectively", "consistently", "feasible", "conservative", "pragmatic", 
+            "redundant", "strategic", "contingent upon", "at the discretion of", "in accordance with", 
+            "with respect to", "in terms of", "pursuant to", "draw the line", "mitigate", "reconcile", "substantially"
+        ];
+
+        async function generateLessonFromYouTube() {
+            const inputVal = document.getElementById('custom-yt-input').value.trim();
+            const topicVal = document.getElementById('custom-topic-input').value.trim();
+            const genBtn = document.getElementById('generate-lesson-btn');
+            const btnText = document.getElementById('generate-btn-text');
+
+            if (!inputVal) {
+                showToast("Please enter a valid YouTube URL or Video ID.");
+                return;
+            }
+
+            const vidId = extractVideoId(inputVal);
+            if (!vidId) {
+                showToast("Could not parse YouTube Video ID from the link provided.");
+                return;
+            }
+
+            // Update video state and player immediately
+            currentVideoId = vidId;
+            const player = document.getElementById('hbr-youtube-player');
+            if (player) player.src = getEmbedUrl(0);
+            const extLink = document.getElementById('external-yt-link');
+            if (extLink) extLink.href = `https://www.youtube.com/watch?v=${currentVideoId}`;
+
+            // Trigger AI Generation loading state
+            genBtn.disabled = true;
+            genBtn.classList.add('opacity-75');
+            btnText.textContent = "Synthesizing Lesson...";
+            showToast("Calling Gemini AI to generate custom executive staged lesson...");
+
+            const systemInstruction = `You are an elite executive business English communication coach for Onestein, the Chief Global Business Officer (CGBO) at Dunamu.
+Your role is to analyze the user's provided YouTube video and formulate a complete, high-stakes 6-part executive staged networking and communication lesson.
+
+STRICT CONSTRAINTS:
+1. Student: Onestein (Dunamu CGBO). Coach: Nam Frank Kwang Woo (GAGYO).
+2. ANTI-JARGON POLICY: Strictly NO theatrical buzzwords ("non-negotiable bedrock", "hard red line"). High-stakes institutional corporate English only.
+3. STRICT MASTER VOCABULARY BLACKLIST (NEVER USE ANY OF THESE):
+${JSON.stringify(MASTER_BLACKLIST)}
+4. EXPRESSIONS SOURCE: The 3 expressions MUST come from professional corporate idioms (such as "read the room", "strike a chord", "top of mind", "up the ante", "look under the hood", "manage expectations", "bridge the gap", "skin in the game", "move the needle", "play the long game", etc.) and NEVER overlap with the blacklist.
+5. JSON STRUCTURE MANDATE: You must return valid raw JSON matching the requested schema exactly.`;
+
+            const userPrompt = `Generate a complete executive staged lesson based on this YouTube video:
+Video URL: https://www.youtube.com/watch?v=${currentVideoId}
+Optional topic/title/context hint: "${topicVal || "Use the video theme for high-stakes C-suite executive networking & commercial discourse"}"
+
+Return a JSON object with:
+- "videoTitle": concise descriptive title for this video topic
+- "timestamps": array of 4-6 objects with "seconds" (int) and "label" (string phrase)
+- "acousticPriming": array of exactly 4 objects: "phrase", "phonetic" (IPA or phonetic slash notation), "timestamp" (mm:ss), "rule" (phonetic reduction or catenation explanation)
+- "macroSummary": 2-3 sentence macro executive elevator summary
+- "microChecks": array of 2 string questions/answers for forensic listening
+- "executiveTake": object with "works" (string), "fallsFlat" (string), "apacAngle" (string), "openers" (array of 3 strings: cocktail, dormant, dinner)
+- "curriculum": array of exactly 14 units:
+    * 3 "Expression"
+    * 3 "Verb"
+    * 2 "Adverb"
+    * 2 "Adjective"
+    * 2 "Preposition"
+    * 2 "Pattern"
+    Each unit must have: "term", "category", "enDef", "krDef", "ex1", "ex2", "nuance", "synonyms", "antonyms"
+- "sparring": object with:
+    * "cocktail": array of 6 dialogue turn objects {"speaker": "counterparty"|"onestein", "name": string, "role": string, "text": string, "kr": string}
+    * "dinner": array of 6 dialogue turn objects {"speaker": "counterparty"|"onestein", "name": string, "role": string, "text": string, "kr": string}
+- "dictation": array of exactly 12 objects across Easy (1-4), Intermediate (5-8), and Advanced (9-12):
+    {"q": int 1-12, "tier": "Easy"|"Intermediate"|"Advanced", "target": string, "full": string, "hint": string}`;
+
+            const apiKey = "";
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+
+            const payload = {
+                contents: [{ parts: [{ text: userPrompt }] }],
+                systemInstruction: { parts: [{ text: systemInstruction }] },
+                generationConfig: {
+                    responseMimeType: "application/json"
+                }
+            };
+
+            try {
+                let response = null;
+                for (let attempt = 0; attempt < 3; attempt++) {
+                    try {
+                        response = await fetch(apiUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+                        if (response.ok) break;
+                    } catch (e) {
+                        if (attempt === 2) throw e;
+                        await new Promise(r => setTimeout(r, 1000 * Math.pow(2, attempt)));
+                    }
+                }
+
+                if (!response || !response.ok) {
+                    throw new Error(`API responded with status: ${response ? response.status : 'network error'}`);
+                }
+
+                const result = await response.json();
+                const jsonText = result?.candidates?.[0]?.content?.parts?.[0]?.text;
+                if (!jsonText) throw new Error("Empty response from AI engine.");
+
+                const parsedData = JSON.parse(jsonText);
+                applyGeneratedLessonData(parsedData);
+                showToast("✨ Lesson successfully generated & loaded!");
+            } catch (err) {
+                console.error("Gemini Generation Error:", err);
+                showToast("Could not auto-generate lesson: " + err.message);
+            } finally {
+                genBtn.disabled = false;
+                genBtn.classList.remove('opacity-75');
+                btnText.textContent = "Generate Staged Lesson";
+            }
+        }
+
+        function applyGeneratedLessonData(data) {
+            if (data.videoTitle) {
+                const titleEl = document.getElementById('video-display-title');
+                if (titleEl) titleEl.textContent = data.videoTitle;
+            }
+
+            // 1. Update Timestamps
+            if (Array.isArray(data.timestamps) && data.timestamps.length > 0) {
+                const tsContainer = document.getElementById('timestamp-bookmarks-container');
+                if (tsContainer) {
+                    tsContainer.innerHTML = '';
+                    data.timestamps.forEach(ts => {
+                        const m = Math.floor(ts.seconds / 60).toString().padStart(2, '0');
+                        const s = (ts.seconds % 60).toString().padStart(2, '0');
+                        const btn = document.createElement('button');
+                        btn.className = "timestamp-btn bg-slate-950 hover:bg-slate-800 text-sky-400 border border-slate-800 px-3 py-1.5 rounded-xl text-xs font-mono transition touch-manipulate flex items-center gap-1.5";
+                        btn.onclick = () => seekToTimestamp(ts.seconds);
+                        btn.innerHTML = `<span>⏱️ ${m}:${s}</span> <span class="text-slate-300 font-sans">${ts.label}</span>`;
+                        tsContainer.appendChild(btn);
+                    });
+                }
+            }
+
+            // 2. Update Acoustic Priming
+            if (Array.isArray(data.acousticPriming) && data.acousticPriming.length > 0) {
+                ACOUSTIC_PRIMING_DATA.length = 0;
+                data.acousticPriming.forEach((item, idx) => {
+                    ACOUSTIC_PRIMING_DATA.push({
+                        id: idx + 1,
+                        phrase: item.phrase,
+                        phonetic: item.phonetic,
+                        timestamp: item.timestamp || "00:30",
+                        rule: item.rule
+                    });
+                });
+                renderAcousticPriming();
+            }
+
+            // 3. Update Macro & Micro Comprehension checks
+            if (data.macroSummary) {
+                const el = document.getElementById('macro-summary-text');
+                if (el) el.textContent = `"${data.macroSummary}"`;
+            }
+            if (Array.isArray(data.microChecks) && data.microChecks.length > 0) {
+                const list = document.getElementById('micro-checks-list');
+                if (list) {
+                    list.innerHTML = '';
+                    data.microChecks.forEach(mc => {
+                        const li = document.createElement('li');
+                        li.innerHTML = mc;
+                        list.appendChild(li);
+                    });
+                }
+            }
+
+            // 4. Update The Executive Take
+            if (data.executiveTake) {
+                const et = data.executiveTake;
+                if (et.works) document.getElementById('take-works-text').innerHTML = et.works;
+                if (et.fallsFlat) document.getElementById('take-falls-flat-text').innerHTML = et.fallsFlat;
+                if (et.apacAngle) document.getElementById('take-apac-angle-text').textContent = `"${et.apacAngle}"`;
+                if (Array.isArray(et.openers) && et.openers.length >= 3) {
+                    const grid = document.getElementById('openers-grid');
+                    if (grid) {
+                        grid.innerHTML = `
+                            <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800 space-y-1.5">
+                                <span class="text-sky-400 font-bold text-[10px] uppercase">1. Cocktail Opener</span>
+                                <p class="text-slate-200 italic">"${et.openers[0]}"</p>
+                            </div>
+                            <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800 space-y-1.5">
+                                <span class="text-emerald-400 font-bold text-[10px] uppercase">2. Dormant Tie Reconnection</span>
+                                <p class="text-slate-200 italic">"${et.openers[1]}"</p>
+                            </div>
+                            <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800 space-y-1.5">
+                                <span class="text-purple-400 font-bold text-[10px] uppercase">3. Dinner Counter-Take</span>
+                                <p class="text-slate-200 italic">"${et.openers[2]}"</p>
+                            </div>
+                        `;
+                    }
+                }
+            }
+
+            // 5. Update Target Curriculum (14 units)
+            if (Array.isArray(data.curriculum) && data.curriculum.length > 0) {
+                CURRICULUM_DATA.length = 0;
+                data.curriculum.forEach((unit, idx) => {
+                    CURRICULUM_DATA.push({
+                        id: idx + 1,
+                        term: unit.term,
+                        category: unit.category,
+                        enDef: unit.enDef,
+                        krDef: unit.krDef,
+                        ex1: unit.ex1,
+                        ex2: unit.ex2,
+                        nuance: unit.nuance,
+                        synonyms: unit.synonyms,
+                        antonyms: unit.antonyms
+                    });
+                });
+                renderCurriculum();
+            }
+
+            // 6. Update Sparring Dialogues
+            if (data.sparring) {
+                if (Array.isArray(data.sparring.cocktail)) SPARRING_DATA.cocktail = data.sparring.cocktail;
+                if (Array.isArray(data.sparring.dinner)) SPARRING_DATA.dinner = data.sparring.dinner;
+                renderSparring();
+            }
+
+            // 7. Update Dictation Lab
+            if (Array.isArray(data.dictation) && data.dictation.length > 0) {
+                DICTATION_DATA.length = 0;
+                data.dictation.forEach((d, idx) => {
+                    DICTATION_DATA.push({
+                        q: idx + 1,
+                        tier: d.tier,
+                        target: d.target,
+                        full: d.full,
+                        hint: d.hint
+                    });
+                });
+                renderDictationLab();
+            }
+        }
+
+        function resetToHBRSample() {
+            document.getElementById('custom-yt-input').value = "https://www.youtube.com/watch?v=MnrINCauK-E";
+            document.getElementById('custom-topic-input').value = "";
+            currentVideoId = "MnrINCauK-E";
+            seekToTimestamp(0);
+            location.reload();
         }
 
         // --- RENDER FUNCTIONS ---
